@@ -7,7 +7,7 @@ interface RequestFormProps {
   title: string;
 }
 
-const RequestForm: React.FC<RequestFormProps> = ({ onClose, title }) => {
+const BackendForm: React.FC<RequestFormProps> = ({ onClose, title }) => {
   const [showLetter, setShowLetter] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -547,4 +547,5 @@ const RequestForm: React.FC<RequestFormProps> = ({ onClose, title }) => {
   );
 };
 
-export default RequestForm;
+export default BackendForm;
+

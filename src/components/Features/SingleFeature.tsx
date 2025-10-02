@@ -1,19 +1,35 @@
-"use client";
+'use client';
 
+import RequestForm from "./RequestForm";
+import BackendForm from "./BackendForm";
+import VideoForm from "./VideoForm";
+import PostForm from ".//PostForm";
+import WebForm from "./WebForm";
 import { Feature } from "@/types/feature";
 import { useState } from "react";
-import RequestForm from "./RequestForm";
 
 const SingleFeature = ({ feature }: { feature: Feature }) => {
   const { icon, title, paragraph } = feature;
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsOverlayOpen(true);
-  };
+  const handleClick = () => setIsOverlayOpen(true);
+  const handleClose = () => setIsOverlayOpen(false);
 
-  const handleClose = () => {
-    setIsOverlayOpen(false);
+  const renderForm = () => {
+    switch (title) {
+      case "Full Package Service":
+        return <RequestForm onClose={handleClose} title={title} />;
+      case "Backend Management":
+        return <BackendForm onClose={handleClose} title={title} />;
+      case "Video Production":
+        return <VideoForm onClose={handleClose} title={title} />;
+      case "Post Design":
+        return <PostForm onClose={handleClose} title={title} />;
+      case "Web Development":
+        return <WebForm onClose={handleClose} title={title} />;
+      default:
+        return <RequestForm onClose={handleClose} title={title} />;
+    }
   };
 
   return (
@@ -26,7 +42,6 @@ const SingleFeature = ({ feature }: { feature: Feature }) => {
         <div className="bg-primary/10 text-primary mb-5 flex h-[70px] w-[70px] items-center justify-center rounded-md">
           {icon}
         </div>
-
         <h3 className="mb-3 text-xl font-bold text-black sm:text-2xl lg:text-xl xl:text-2xl dark:text-white">
           {title}
         </h3>
@@ -35,9 +50,7 @@ const SingleFeature = ({ feature }: { feature: Feature }) => {
         </p>
       </div>
 
-      {isOverlayOpen && (
-        <RequestForm onClose={handleClose} title={title} />
-      )}
+      {isOverlayOpen && renderForm()}
     </div>
   );
 };
